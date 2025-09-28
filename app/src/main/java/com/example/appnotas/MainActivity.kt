@@ -23,7 +23,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Usa tu Toolbar como ActionBar
         setSupportActionBar(binding.toolbarMain)
+
         setupRecyclerView()
         observeNotas()
         setupToolbarActions()
@@ -39,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             binding.recyclerNotas.adapter = NotaAdapter(notasList,
                 onClick = { nota ->
                     notaSeleccionada = nota
-                    // doble clic: abrimos detalle/editar
                     val intent = Intent(this, NotaDetalleActivity::class.java)
                     intent.putExtra("notaId", nota.id)
                     startActivity(intent)
@@ -85,7 +86,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // Refresca la lista al volver de agregar/editar
         binding.recyclerNotas.adapter?.notifyDataSetChanged()
     }
 }
